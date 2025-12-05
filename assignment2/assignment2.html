@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Face Generator</title>
+  <link rel="stylesheet" href="../style.css">
+
+  <!-- p5.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/p5@1.11.10/lib/p5.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.10/lib/addons/p5.sound.min.js"></script>
+</head>
+<body>
+
+  <header class="hero">
+    <h1>Face Generator</h1>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="../about.html">About Me</a>
+    </nav>
+  </header>
+
+  <main class="grid">
+
+    <!-- Project Description -->
+    <section class="card">
+      <h2>Project Description</h2>
+      <p>
+       My figure is inspired by Japanese cartoon, Anpanman. 
+       When I check the requirement about the random value. I think about making the eye changing color, like he is having a party. 
+<br>
+        <br>
+        During the process, I found out that the value and coordination of each part of the face has to be a relative value to the whole face, otherwise,
+         if the position is a fixed number, when the face is small enough, the facial parts will go out of the boundary. <br>
+      
+        <br>
+        <br>
+        <img src = "pixil-frame-0.png" alt="big face" >
+        <br>
+        <img src = "pixil-frame-0 (1).png" alt="small face">
+
+        </p>
+    </section>
+
+    <!-- p5 Sketch -->
+    <section class="card">
+      <h2>My Sketch</h2>
+      <div id="sketch-container"></div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>© 2025 My Portfolio</p>
+  </footer>
+
+
+  <!-- p5.js SKETCH SCRIPT -->
+  <script>
+
+let faceL = 200;
+let faceW = 200;
+let r = 0;
+let g = 0;
+let b = 0;
+function setup() {
+  let canvas = createCanvas(400, 400);
+  canvas.parent("sketch-container")
+}
+
+function draw() {
+  background(220);
+  //face
+  push()
+    strokeWeight(3)
+    fill(255, 228, 156)
+    ellipse(200,200,faceW,faceL);
+  pop()
+  
+  //eye white
+  push()
+  fill(255)
+    ellipse(abs(200-faceW/2+faceW/3),
+            abs(200-faceL/2+faceL/2.5),
+            faceW/6,faceL/2.5);
+    ellipse(abs(200-faceW/2+faceW/1.6),
+            abs(200-faceL/2+faceL/2.5),
+            faceW/6,faceL/2.5);
+  pop()
+  
+  //nose
+  push()
+  fill(153, 77, 38)
+    ellipse(abs(200-faceW/2+faceW/2),
+          abs(200-faceL/2+faceL/1.6),
+          faceW/5,faceL/6);
+  pop()
+  
+  //cheek
+  push()
+  fill(237, 159, 114)
+    ellipse(abs(200-faceW/2+faceW/4),
+          abs(200-faceL/2+faceL/1.6),
+          faceW/4,faceL/8);
+    ellipse(abs(200-faceW/2+faceW/1.3),
+          abs(200-faceL/2+faceL/1.6),
+          faceW/4,faceL/8);
+  pop()
+  
+  //mouth
+  push()
+  fill(209, 209, 209)
+    ellipse(abs(200-faceW/2+faceW/2),
+          abs(200-faceL/2+faceL/1.25),
+          faceW/2.5,faceL/8);
+  pop()
+  
+  //pupil
+  push()
+  r = random(0,255)
+  g = random(0, 255)
+  b = random(0, 255)
+  fill(r,g,b)
+    ellipse(abs(200-faceW/2+faceW/2.8),
+            abs(200-faceL/2+faceL/2.3),
+            faceW/10,faceL/5);
+    ellipse(abs(200-faceW/2+faceW/1.55),
+            abs(200-faceL/2+faceL/2.3),
+            faceW/10,faceL/5);
+  pop()
+  
+  //eyelid 
+  push()
+    line(abs(200-faceW/2+faceW/2.3),abs(200-faceL/2+faceL/3.3),
+        abs(200-faceW/2+faceW/4.5),abs(200-faceL/2+faceL/3.3),)
+    line(abs(200-faceW/2+faceW/1.9),abs(200-faceL/2+faceL/3.3),
+        abs(200-faceW/2+faceW/1.3),abs(200-faceL/2+faceL/3.3),)
+  pop()
+  
+  //teeth
+  push()
+  fill(255)
+  rect(abs(200-faceW/2+faceW/2.3),
+          abs(200-faceL/2+faceL/1.35),
+          faceW/7,faceL/15)
+  pop()
+  
+  //console.log(mouseX)
+}
+
+
+function mouseDragged(){
+  faceL = mouseX;
+  faceW = mouseY;
+}
+
+
+    // Your p5.js code will go here. 
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Lost and Found</title>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- p5.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/p5@1.11.10/lib/p5.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.10/lib/addons/p5.sound.min.js"></script>
+</head>
+<body>
+
+  <header class="hero">
+    <h1>Lost and Found</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About Me</a>
+    </nav>
+  </header>
+
+  <main class="grid">
+
+    <!-- Project Description -->
+    <section class="card">
+      <h2>Project Description</h2>
+      <p>
+       my partner said that he was looking out of a window, and the window has grid. The window has circular pattern.
+        There are pine trees and a beach behind the pine trees. The view is located at 7th floor, and there is a bird flying. <br>
+        <br>
+        My own interpretation is a view of a ocean and pine trees at the side.
+        At first I was thinking about circular patterns at a lot of small circles on the window, and there are four panels on the window.<br>
+        <br>
+        However, along the stage I realized that as an image itself, the initial design does not look aesthetically appalling.
+         It has to look good at first, and the composition is way too complex. I minimized the circular pattern to big circles to reduce the complexity at the center. I also simplified the window.<br> 
+         <br>
+        In general, the image would be 4 squares at the edges as window, 4 circles at the center as window patterns, some triangles and a rectangle as a pine tree.
+         It's hard to come up with the depiction of a bird. It's made up with two circles as body and three triangles as tail and wings.
+      </p>
+    </section>
+
+    <!-- p5 Sketch -->
+    <section class="card">
+      <h2>My Sketch</h2>
+      <div id="sketch-container"></div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>© 2025 My Portfolio</p>
+  </footer>
+
+
+  <!-- p5.js SKETCH SCRIPT -->
+  <script>
+
+
+let c1,c2, d1,d2;
+
+function gradient(c1,c2, h, w){
+    for(let y=0; y<h; y++){
+    n = map(y,0,h,0,1);
+    let newc = lerpColor(c1,c2,n);
+    stroke(newc);
+    line(0,y,w, y);
+  }
+}
+
+    function setup() {
+  
+  //setting up gradient background
+  
+  let canvas = createCanvas(636, 683);
+  c1 = color(66, 145, 255);
+  c2 = color(12, 13, 64);
+  gradient(c1,c2,height,width)
+  angleMode(DEGREES)
+  blendMode(BLEND)
+  canvas.parent("sketch-container")
+    }
+
+function draw() {
+  //background(220);
+  
+  //sky
+  push()
+  d1=color(162, 250, 248)
+  d2=color(255)
+  gradient(d1,d2,height/2,width)
+  pop()
+  
+  //beach
+  push()
+  rotate(10)
+  translate(100,0)
+  noStroke()
+  fill(230, 211, 126)
+  triangle(0,497,213,656,0,676)
+  pop()
+  
+  //pine tree
+  push()
+  noStroke()
+  fill(24, 115, 27,220)
+  triangle(96,210,58,380,153,380)
+  triangle(96,320,45,500,184,500)
+  triangle(96,400,40,600,200,600)
+  triangle(width-96,210,width-58,380,width-153,380)
+  triangle(width-96,320,width-45,500,width-184,500)
+  triangle(width-96,400,width-40,600,width-200,600)
+  pop()
+  
+  push()
+  noStroke()
+  fill(66, 57, 40)
+  rect(85,600,40,70)
+  rect(width-120,600,40,70)
+  pop()
+  
+  
+  //window
+  push()
+  noStroke()
+  fill(158, 129, 96)
+  rect(0,0,width,30)
+  rect(0,0,30,height)
+  rect(0,height-30,width,30)
+  rect(width-30,0,30,height)
+  rect((width-50)/2,0,50,height)
+  pop()
+  
+  push()
+  strokeWeight(10)
+  line((width)/2,0,(width)/2,height)
+  pop()
+  
+
+  //bird 
+  push()
+    translate(10,10)
+    noStroke()
+    fill(105, 104, 102,100)
+    triangle(472,99,499,160,510,100)
+  pop()
+  
+  push()
+  translate(10,10)
+  noStroke()
+  fill(105, 104, 102)
+  ellipse(486,99,70,30)
+  ellipse(530,99,25)
+  triangle(423,84,432,122,466,96)
+  triangle(472,99,460,160,504,110)
+  pop()
+  
+  //window pattern 
+  push()
+  noStroke()
+  fill(126, 186, 230,70)
+  ellipse(165,182,200)
+  ellipse(165,477,200)
+  ellipse(480,182,200)
+  ellipse(480,477,200)
+  pop()
+  
+
+  //console.log(windowWidth, windowHeight)
+}
+
+    // Your p5.js code will go here. 
+  </script>
+
+</body>
+</html>

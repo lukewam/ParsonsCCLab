@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Experimental Clock</title>
+  <link rel="stylesheet" href="../style.css">
+
+  <!-- p5.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/p5@1.11.10/lib/p5.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.10/lib/addons/p5.sound.min.js"></script>
+</head>
+<body>
+
+  <header class="hero">
+    <h1>Experimental Clock</h1>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="../about.html">About Me</a>
+    </nav>
+  </header>
+
+  <main class="grid">
+
+    <!-- Project Description -->
+    <section class="card">
+      <h2>Project Description</h2>
+      <p>
+       This clock is inspired by the oriental elegancy and romantic spirit, 
+       that time should not be just a number but a part of nature and art. 
+       In nature, flowers are one representation of the time, since flowers and leaves are seasonal, 
+       and the sun is changing along the day. I want everything to be a whole thing, no number, no clock hand, nothing but only painting itself.
+      <br>
+      <br>
+        In this project, leaves are representing the hours, the flowers are representing minutes, the sun is representing the day and night. 
+        The number of leaf is current hour, in 12 hour format. If there is a sun, it is first 12 hours of the day. 
+        If there is no sun, it is the second 12 hours of the day. The number of flower is how many 5 minutes has pass in current hour, just like a grid in a clock.
+        <br>
+        <br>
+        For example, in the morning, 8:08 would be a sun, 8 leaves, 2 flowers.
+        <br>
+        <br>
+        My three ideas are more like a process of thinking. From the most basic, using number to represent time, 
+        and clock hand to represent the time, to this, I keep thinking about how I can do differently than the traditional representation.
+        <br>
+        <br>
+        What I learn from this assignment is that coding is just a tool for the art making. My codes are not that complex, but it does has a good artistic outcome. 
+        <br>
+      </p>
+    </section>
+
+    <!-- p5 Sketch -->
+    <section class="card">
+      <h2>My Sketch</h2>
+      <div id="sketch-container"></div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>© 2025 My Portfolio</p>
+  </footer>
+
+
+  <!-- p5.js SKETCH SCRIPT -->
+  <script>
+
+//flower is minute, leaf is hour, sun is morning or afternoon
+
+let flowerPOS = [151,399,371,166,437,96,726,179,448,451,832,292,886,281,337,382,613,353,590,310,800,551,875,421]
+let leafPOS=[117,326,260,271,508,271,433,106,715,178,861,281,814,691,524,603,322,560,267,135,642,191,106,377]
+
+function setup() {
+  let canvas = createCanvas(1000, 1000);
+  canvas.parent("sketch-container");
+}
+
+function preload() {
+  trunk = loadImage('./asset/trunk.png');
+  flower=loadImage('./asset/flower.png');
+  leaf=loadImage('./asset/leaf.png');
+  sun=loadImage('./asset/sun.png');
+}
+
+function draw() {
+  background(220);
+  image(trunk, 0, 0);
+  //image(sun,0,0,300,300)
+  //console.log(mouseX,mouseY)
+  //console.log(leafPOS.length)
+  
+  //change the method to test
+  drawMin(minute())
+  drawHr(hour())
+  //console.log(hour()/2)
+}
+
+function drawMin(x){
+  for(let i = 0; i < 12; i ++){
+    if((x / 5) >= i){
+      image(flower,(flowerPOS[i*2]-40),flowerPOS[i*2 + 1], 100, 100)
+      //console.log(i)
+    }
+  }
+}
+
+function drawHr(x){
+
+    if( x > 12) {
+        for(let i = 0; i < 12; i ++){
+      if((x -12 - 1) >= i){
+        image(leaf,leafPOS[i*2],(leafPOS[i*2 + 1]-80), 100, 100)
+        //console.log(i)
+      } } 
+    } else{
+      image(sun,0,0,300,300)
+      for(let i = 0; i < 12; i ++){
+      if((x - 1) >= i){
+        image(leaf,leafPOS[i*2],(leafPOS[i*2 + 1]-80), 100, 100)
+        //console.log(i)
+      } } 
+    }
+}
+
+    // Your p5.js code will go here. 
+  </script>
+
+</body>
+</html>

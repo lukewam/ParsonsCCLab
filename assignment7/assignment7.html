@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Autobiographical Game</title>
+  <link rel="stylesheet" href="../style.css">
+
+  <!-- p5.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/p5@1.11.10/lib/p5.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.10/lib/addons/p5.sound.min.js"></script>
+</head>
+<body>
+
+  <header class="hero">
+    <h1>Autobiographical Game</h1>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="../about.html">About Me</a>
+    </nav>
+  </header>
+
+  <main class="grid">
+
+    <!-- Project Description -->
+    <section class="card">
+      <h2>Project Description</h2>
+      <p>
+       My research process focused on how to make optical illusion animated. The typical optical illusion we usually get is a picture that tricks viewer to think the picture is moving. 
+       When I look more into optical illusion, I found out that optical illusion also includes animation that create some mental effects.
+       <br>
+       <br>
+    When I first tried to create this project, I took inspiration from the example, which used self defined class. When I tried to wrote it, 
+    I found it unnecessary and I think most of the time we dont care about efficiency or big O, the simpler the code the better. 
+        <br>
+        <br>
+        Mine created a really strong disturbing effect and makes people dizzy. I think it can be used in videos to create that unsettle feeling in the environment. <br>
+      
+        </p>
+    </section>
+
+    <!-- p5 Sketch -->
+    <section class="card">
+      <h2>My Sketch</h2>
+      <div id="sketch-container"></div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>© 2025 My Portfolio</p>
+  </footer>
+
+
+  <!-- p5.js SKETCH SCRIPT -->
+  <script>
+let scene = "start"
+let player;
+let walkScene = 0;
+let ghosts = [];
+let r
+let dayCt = 0;
+let showWhich;
+let showG;
+
+function setup() {
+  let canvas = createCanvas(600, 600);  
+  canvas.parent("sketch-container")
+  r = random(50, 600);
+  //hardcoded 
+  showWhich = floor(random(5));
+  showG = floor(random(3));
+
+  ghosts.push(new Ghost(ghost1, random(0, 600 -r), r));
+  ghosts.push(new Ghost(ghost2,random(0, 600 -r), r));
+  ghosts.push(new Ghost(ghost4,random(0, 600 -r), r));
+  ghosts.push(new Ghost(ghost5,random(0, 600 -r), r));
+  ghosts.push(new Ghost(ghost3,0,600));
+  startGame();
+}
+
+function preload() {
+  lr = loadSound('lr.mp3')
+  endG = loadImage('endG.jpg');
+  ghost1 = loadImage('ghost1.jpg');
+  ghost2=loadImage('ghost2.avif');
+  ghost4 = loadImage('ghost4.jpg');
+  ghost5 = loadImage('ghost5.jpg');
+  ghost3=loadImage('ghost3.avif');
+  subway1=loadImage('subway1.JPEG');
+  sb1 = loadImage('sb1.jpg');
+  sb2 = loadImage('sb2.jpg');
+  subway2=loadImage('subway2.JPEG');
+  classroom1=loadImage('classroom1.png');
+  cr1 = loadImage('cr1.png');
+  classroom2=loadImage('classroom2.png');
+  cr2 = loadImage('cr2.jpg');
+  mc = loadImage('mc.png');
+  nd = loadImage('nextday.png');
+}
+
+class Ghost {
+  constructor(img, r, p){
+    this.img = img;
+    this. r = r;
+    this.p = p;
+  }
+
+  changePos(){
+    this.r = random(50, 600);
+    this. p = random(0, 600 - this.r)
+  }
+  
+  display(){
+    if(dayCt > 0 && showG){
+    push()
+    tint(255, 127);
+    image(this.img, this.r, this.r, this.p, this.p)
+    pop()
+
+    }
+    this.check = true;
+  }
+  
+}
+
+class Player {
+  constructor(){
+    //how many days passed
+    this.days = 0;
+    this.x = 50;
+    this.y = height
+    this.yBase = height
+    this.nextScene = false
+  }
+  
+  display(){
+    //rect(this.x,this.y-200,100,200);
+    image(mc,this.x, this.y-300,200,400)
+  }
+  
+  controls(){
+    if (keyIsDown(LEFT_ARROW)) this.x -= 2;
+    if (keyIsDown(RIGHT_ARROW)) this.x += 5;
+    
+    if (keyIsDown(LEFT_ARROW) || keyIsDown(RIGHT_ARROW)) {
+  this.y = this.yBase - (frameCount % 20 < 10 ? 10 : 0); // up when moving
+  } else {
+    this.y = this.yBase; // down when standing
+    
+  if(this.x >= 600){
+      this.nextScene = true;
+
+        }
+      }
+    }
+}
+
+function draw() {
+  background(43, 42, 42);
+  
+  switch(scene){
+    case "start" :
+      startScene()
+      break;
+    case "walkday" :
+      walkday()
+      break;
+    case "nextDay":
+      nextday();
+      break;
+    case "end":
+      end();
+      break;
+  }
+}
+
+function startGame(){
+  player = new Player();
+  scene = "start";
+}
+
+function end(){
+  image(endG, 0,0, 600,600);
+}
+
+function nextday(){
+  if(keyIsDown(32)){
+  if(dayCt == 1){
+    lr.play();
+  }
+    scene = "walkday";
+  }
+  if(dayCt > 3){
+    scene = "end"
+  }
+  image(nd, 0,0, 600,600);
+}
+
+function startScene() {
+  textAlign(CENTER);
+  fill(191, 44, 44);
+  textFont('Courier New',20);
+  text("This is based on true story", width / 2, height / 2 - 20);
+  textSize(16);
+  text("Use LEFT/RIGHT to move, click to investigate", width / 2, height / 2 + 10);
+  text("Press SPACE to start", width / 2, height / 2 + 40);
+
+  if (keyIsDown(32)) {
+    scene = "walkday";
+  }
+  
+}
+
+function walkday() {
+  switch (walkScene){
+    case 0: 
+      if(dayCt > 1){
+        image(cr1,0,0, 600,600);
+      } else{
+      image(classroom1, 0,0, 600,600);
+      }
+      ghosts[showWhich].display();
+      break;
+    case 1:
+      if(dayCt > 1 ){
+        image(cr2,0,0, 600,600);
+      } else {
+      image(classroom2,0,0, 600,600);
+      }
+      ghosts[showWhich].display();
+      break;
+    case 2: 
+      if(dayCt > 1 ){
+          image(sb1,0,0, 600,600);
+      } else {
+          image(subway1, 0,0, 600,600);
+      }
+        ghosts[showWhich].display();
+      break;
+    case 3:
+      if(dayCt > 1 ){
+          image(sb2,0,0, 600,600);
+      } else {
+          image(subway2,0,0, 600,600);
+      }
+        ghosts[showWhich].display();
+      break;
+  }
+  player.display();
+  player.controls();
+  if(player.nextScene == true && walkScene <3){
+    walkScene ++;
+    player.x = 50;
+    player.nextScene = false;
+    showWhich = floor(random(ghosts.length));
+    showG = floor(random(3));
+    for(i = 0; i < ghosts.length-1; i ++){
+      ghosts[i].changePos();
+    }
+    if(dayCt > 2){
+      showG = 1;
+    }
+
+  } if (player.nextScene == true && walkScene >=3){
+    dayCt++;
+    showWhich = floor(random(ghosts.length));
+    showG = floor(random(3));
+    if(dayCt > 2){
+      showG = 1;
+    }
+    player.nextScene = false;
+    walkScene = 0;
+    player.x = 50;
+    for(i = 0; i < ghosts.length-1; i ++){
+      ghosts[i].changePos();
+    }
+    
+    
+    scene = "nextDay";
+  }
+}
+    // Your p5.js code will go here. 
+  </script>
+
+</body>
+</html>

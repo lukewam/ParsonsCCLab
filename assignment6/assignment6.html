@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Data Portrait</title>
+  <link rel="stylesheet" href="../style.css">
+
+  <!-- p5.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/p5@1.11.10/lib/p5.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.10/lib/addons/p5.sound.min.js"></script>
+</head>
+<body>
+
+  <header class="hero">
+    <h1>Data Portrait</h1>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="../about.html">About Me</a>
+    </nav>
+  </header>
+
+  <main class="grid">
+
+    <!-- Project Description -->
+    <section class="card">
+      <h2>Project Description</h2>
+      <p>
+       I have an app on my phone that tracks where I go during the day, and when I first hear this assignment, 
+       I immediately think this is the perfect fit for my project. 100 % accurate data taken, and the sample amount is enormous. 
+       Even though it is not the most creative way to present, I think it is straight forwards to comprehend 
+       and really shows a pattern of where I go in a week, and my habit of commuting and hanging out with my friend.
+       <br>
+       <br>
+    Each dot is a location taken when I start moving, and it records how I move during the week. 
+    The instruction is simple: I insert the screen shot of the map, and it matches the range of where I go usually. 
+        <br>
+        <br>
+        I export the data from the app, and it was a csv file. I did multiple test, it does not contain a week long file, 
+        so I test first with 1 day file to make sure it work and truncate a year long file, since it was too big. I then map the longtitude and 
+        latitude to the size of the canvas and convert them to x and y. 
+I mimic the style of an apple map, so viewers would feel familiar to what they see everyday. 
+<br>
+<br>
+      The good thing about using csv file and real life map is that I think there is no loss in data visualization at all (except the READ ME i mentioned), 
+      and the gain is that the data is over 2000 locations, and it is literally unreadable, so data visualization makes it possible to read.
+        </p>
+    </section>
+
+    <!-- p5 Sketch -->
+    <section class="card">
+      <h2>My Sketch</h2>
+      <div id="sketch-container"></div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>© 2025 My Portfolio</p>
+  </footer>
+
+
+  <!-- p5.js SKETCH SCRIPT -->
+  <script>
+
+//double array containing longtitude and latitude
+let pts = [];
+
+function preload() {
+  table = loadTable('fp1.csv', 'csv', 'header');
+  maps = loadImage('map.png');
+}
+
+function setup() {
+
+  let canvas = createCanvas(636, 638);
+    canvas.parent("sketch-container")
+  background(245);
+  image(maps,-638/19 , 638/7,636, 638*2/3)
+  
+
+  // collect valid lat/lon
+  for (let r = 0; r < table.getRowCount(); r++) {
+    const lat = float(table.getString(r, 'latitude'));
+    const lon = float(table.getString(r, 'longitude'));
+    pts.push({ lat, lon });
+  }
+ 
+  //exception
+  if (pts.length === 0) {
+    noLoop();
+    return;
+  }
+
+  // bounds
+  const minLat = Math.min(...pts.map(p => p.lat));
+  const maxLat = Math.max(...pts.map(p => p.lat));
+  const minLon = Math.min(...pts.map(p => p.lon));
+  const maxLon = Math.max(...pts.map(p => p.lon));
+
+  // ensure all points fit within visible region with a clean margin
+  const margin = 40;
+  const w = width - 2 * margin;
+  const h = height - 2 * margin;
+
+  // scale to fit (keep aspect ratio), use or in case max == min
+  const sx = w / (maxLon - minLon || 1);
+  const sy = h / (maxLat - minLat || 1);
+  const s = min(sx, sy);
+
+  // center the plot within canvas, constant offset
+  const offsetX = (width  - (maxLon - minLon) * s) / 2;
+  const offsetY = (height - (maxLat - minLat) * s) / 2;
+
+  // draw all points
+  fill(30, 144, 255, 180);
+  noStroke();
+  for (var p of pts) {
+    const x = offsetX + (p.lon - minLon) * s;
+    const y = height - (offsetY + (p.lat - minLat) * s);
+    circle(x, y, 4);
+  }
+}
+    // Your p5.js code will go here. 
+  </script>
+
+</body>
+</html>

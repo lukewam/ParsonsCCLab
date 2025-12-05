@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Optical Illusion</title>
+  <link rel="stylesheet" href="../style.css">
+
+  <!-- p5.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/p5@1.11.10/lib/p5.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.10/lib/addons/p5.sound.min.js"></script>
+</head>
+<body>
+
+  <header class="hero">
+    <h1>Optical Illusion</h1>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="../about.html">About Me</a>
+    </nav>
+  </header>
+
+  <main class="grid">
+
+    <!-- Project Description -->
+    <section class="card">
+      <h2>Project Description</h2>
+      <p>
+       My research process focused on how to make optical illusion animated. The typical optical illusion we usually get is a picture that tricks viewer to think the picture is moving. 
+       When I look more into optical illusion, I found out that optical illusion also includes animation that create some mental effects.
+       <br>
+       <br>
+    When I first tried to create this project, I took inspiration from the example, which used self defined class. When I tried to wrote it, 
+    I found it unnecessary and I think most of the time we dont care about efficiency or big O, the simpler the code the better. 
+        <br>
+        <br>
+        Mine created a really strong disturbing effect and makes people dizzy. I think it can be used in videos to create that unsettle feeling in the environment. <br>
+      
+        </p>
+    </section>
+
+    <!-- p5 Sketch -->
+    <section class="card">
+      <h2>My Sketch</h2>
+      <div id="sketch-container"></div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>© 2025 My Portfolio</p>
+  </footer>
+
+
+  <!-- p5.js SKETCH SCRIPT -->
+  <script>
+
+let barWidth = 12;   // thickness of each vertical bar
+let speed = 2;       // movement speed
+
+function setup() {
+  let canvas = createCanvas(windowWidth, windowHeight);
+  canvas.parent("sketch-container")
+  noStroke();
+}
+
+function draw() {
+  background(0); 
+
+  let offsetX = (frameCount * speed) % barWidth;
+
+  // outer loop: vertical bars moving horizontally
+  for (let x = -barWidth; x < width + barWidth; x += barWidth) {
+    // inner loop: horizontal segments within each vertical bar
+    for (let y = 0; y < height; y += barWidth) {
+      fill(random(255), random(255), random(255)); // random RGB color
+      rect(x + offsetX, y, barWidth, barWidth);
+    }
+  }
+}
+
+    // Your p5.js code will go here. 
+  </script>
+
+</body>
+</html>

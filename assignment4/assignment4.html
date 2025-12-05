@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exquisite Corpse</title>
+  <link rel="stylesheet" href="../style.css">
+
+  <!-- p5.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/p5@1.11.10/lib/p5.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.10/lib/addons/p5.sound.min.js"></script>
+</head>
+<body>
+
+  <header class="hero">
+    <h1>Exquisite Corpse</h1>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="../about.html">About Me</a>
+    </nav>
+  </header>
+
+  <main class="grid">
+
+    <!-- Project Description -->
+    <section class="card">
+      <h2>Project Description</h2>
+      <p>
+       Partner Name: 
+       <br>
+        Valentine Ye, Iana Tchantchaleishvili
+        <br>
+        <br>
+        The design process is that we assign different parts to different people, 
+        but we do not look at each others work before we finish our own, so we can create a random character.<br>
+      
+        </p>
+    </section>
+
+    <!-- p5 Sketch -->
+    <section class="card">
+      <h2>My Sketch</h2>
+      <div id="sketch-container"></div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>© 2025 My Portfolio</p>
+  </footer>
+
+
+  <!-- p5.js SKETCH SCRIPT -->
+  <script>
+
+let BODY = [255,150,170];
+let PANTS  = [200,200,255];
+
+function setup() {
+  let canvas = createCanvas(600, 600);
+    canvas.parent("sketch-container")
+  noLoop();
+}
+
+function draw() {
+  background(255);
+
+  let cx = width/2;
+
+  
+  drawSkirt(cx, 320, 60, 70, 380);              
+  drawBoots(cx, 380, 30, 80, 460);              
+  drawPandaHead(cx, 150, 120);
+  drawHeartBodyWithEyes(cx, 230, 45);     
+  drawArms(cx, 260, 90, 370);                  
+
+}
+
+
+function drawPandaHead(x, y, d) {
+  push(); stroke(0); strokeWeight(2);
+
+  // head + ears
+  fill(255); 
+  ellipse(x, y, d);
+  fill(0);
+  ellipse(x - d*0.33, y - d*0.33, d*0.25);
+  ellipse(x + d*0.33, y - d*0.33, d*0.25);
+
+  // eyes
+  fill(0);
+  ellipse(x - d*0.17, y, d*0.17, d*0.23);
+  ellipse(x + d*0.17, y, d*0.17, d*0.23);
+  fill(255); 
+  noStroke();
+  ellipse(x - d*0.17, y, d*0.09);
+  ellipse(x + d*0.17, y, d*0.09);
+
+  // nose + mouth
+  fill(0);
+  ellipse(x, y + d*0.17, d*0.10, d*0.07);
+  stroke(0);
+  line(x, y + d*0.19, x - d*0.07, y + d*0.27);
+  line(x, y + d*0.19, x + d*0.07, y + d*0.27);
+  pop();
+}
+
+function drawHeartBodyWithEyes(cx, topY, r) {
+  fill(...BODY);
+  noStroke();
+  
+  // two circles (lobes)
+  ellipse(cx - 0.9*r, topY, r*2.1);
+  ellipse(cx + 0.9*r, topY, r*2.1);
+  
+  // triangle (bottom)
+  triangle(cx - 1.97*r, topY+10, cx + 1.97*r, topY+10, cx, topY + 2.8*r);
+
+  // simple eye spots
+  stroke(0); strokeWeight(1); fill(255);
+  ellipse(cx - r*0.9, topY + r*0.4, r*0.8, r*0.6);
+  ellipse(cx + r*0.9, topY + r*0.4, r*0.8, r*0.6);
+  noStroke(); fill(0);
+  ellipse(cx - r*0.9, topY + r*0.4, r*0.3);
+  ellipse(cx + r*0.9, topY + r*0.4, r*0.3);
+}
+
+function drawArms(cx, startY, reachX, tipY) {
+  noFill(); stroke(...BODY); strokeWeight(10);
+  // left
+  bezier(cx - 20, startY, cx - reachX, startY + 20, cx - reachX, tipY - 30, cx - 50, tipY);
+  // right
+  bezier(cx + 20, startY, cx + reachX, startY + 20, cx + reachX, tipY - 30, cx + 50, tipY);
+
+  // fingertips
+  noStroke(); fill(255,50,80);
+  ellipse(cx - 50, tipY, 12);
+  ellipse(cx + 50, tipY, 12);
+}
+
+function drawSkirt(cx, topY, halfTop, halfBottom, bottomY) {
+  fill(...PANTS); stroke(0); strokeWeight(2);
+  beginShape();
+  vertex(cx - halfTop, topY);
+  vertex(cx + halfTop, topY);
+  vertex(cx + halfBottom, bottomY);
+  vertex(cx + 18, bottomY);
+  vertex(cx, bottomY - 10);     // center pleat
+  vertex(cx - 18, bottomY);
+  vertex(cx - halfBottom, bottomY);
+  endShape(CLOSE);
+}
+
+function drawBoots(cx, topY, halfW, h, soleY) {
+  stroke(0); strokeWeight(2); fill(230);
+
+  // left boot
+  beginShape();
+  vertex(cx - halfW - 20, topY);
+  vertex(cx - halfW - 20, topY + h*0.75);
+  vertex(cx - halfW - 55, soleY);
+  vertex(cx - halfW + 5,  soleY);
+  vertex(cx - halfW + 5,  topY);
+  endShape(CLOSE);
+
+  // right boot
+  beginShape();
+  vertex(cx + halfW - 5,  topY);
+  vertex(cx + halfW - 5,  topY + h*0.75);
+  vertex(cx + halfW - 35, soleY);
+  vertex(cx + halfW + 25, soleY);
+  vertex(cx + halfW + 25, topY);
+  endShape(CLOSE);
+}
+
+    // Your p5.js code will go here. 
+  </script>
+
+</body>
+</html>
