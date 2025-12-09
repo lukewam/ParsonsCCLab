@@ -2,111 +2,174 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Your Name · Creative Portfolio</title>
+  <title>Your Name · CC Lab Portfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Modern typeface -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <header class="hero">
-    <div class="hero-inner container">
-      <div class="hero-text">
-        <p class="eyebrow">CC Lab · Portfolio</p>
+<div class="layout">
+
+  <!-- LEFT SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <div class="avatar">
+        <!-- Replace with your own image if you want -->
+        <!-- <img src="images/profile.jpg" alt="Portrait of Your Name"> -->
+        <span class="avatar-initials">YN</span>
+      </div>
+
+      <div class="identity">
         <h1>Your Name</h1>
-        <p class="tagline">Creative coding, small experiments, and playful interfaces.</p>
+        <p class="role">CC Lab · Creative Coding</p>
+        <p class="bio">
+          Experiments, glitches, prototypes, and small stories told through code.
+        </p>
       </div>
 
-      <nav class="nav">
-        <a href="index.html" class="nav-link active">Home</a>
-        <a href="about.html" class="nav-link">About Me</a>
+      <nav class="side-nav">
+        <a href="index.html" class="side-nav-link active">Portfolio</a>
+        <a href="about.html" class="side-nav-link">About Me</a>
       </nav>
+
+      <div class="sidebar-footer">
+        <p class="sidebar-note">
+          Built with HTML, CSS, and many console.logs.
+        </p>
+      </div>
     </div>
-  </header>
+  </aside>
 
-  <main class="container main-grid">
-    <!-- Intro / Hero Card -->
-    <section class="card intro">
-      <div class="card-media">
-        <!-- You can insert a hero image here -->
-        <!-- <img src="images/hero.jpg" alt="Preview of my work"> -->
-      </div>
-      <div class="card-body">
-        <h2>Welcome ✶</h2>
-        <p>
-          This is my CC Lab portfolio — a space for weekly experiments,
-          sketches, and works-in-progress.
-        </p>
-        <p>
-          Feel free to dive into each assignment to see process, code, and outcomes.
-        </p>
-      </div>
+  <!-- RIGHT MAIN AREA -->
+  <main class="content">
+
+    <!-- HERO -->
+    <section class="hero-block">
+      <div class="hero-label">CC Lab · 2025</div>
+      <h2>Weekly Assignments & Code Sketches</h2>
+      <p>
+        A running log of projects from this class. Each card links to
+        an assignment page — some polished, some messy, all experiments.
+      </p>
     </section>
 
-    <!-- Assignments Card -->
-    <section class="card assignments">
-      <div class="card-body">
-        <h2>Assignments</h2>
-        <ul class="assignment-list">
-          <li>
-            <a href="./assignment1.html">
-              <span class="asmt-label">01</span>
-              <span class="asmt-title">Assignment 1</span>
-              <span class="asmt-tag">Starter</span>
-            </a>
-          </li>
-          <li>
-            <a href="./assignment2/assignment2.html">
-              <span class="asmt-label">02</span>
-              <span class="asmt-title">Assignment 2</span>
-              <span class="asmt-tag">Iteration</span>
-            </a>
-          </li>
-          <li>
-            <a href="./assignment3/assignment3.html">
-              <span class="asmt-label">03</span>
-              <span class="asmt-title">Assignment 3</span>
-              <span class="asmt-tag">Experiment</span>
-            </a>
-          </li>
-          <li>
-            <a href="./assignment4/assignment4.html">
-              <span class="asmt-label">04</span>
-              <span class="asmt-title">Assignment 4</span>
-              <span class="asmt-tag">Prototype</span>
-            </a>
-          </li>
-          <li>
-            <a href="./assignment5/assignment5.html">
-              <span class="asmt-label">05</span>
-              <span class="asmt-title">Assignment 5</span>
-              <span class="asmt-tag">Play</span>
-            </a>
-          </li>
-          <li>
-            <a href="./assignment6/assignment6.html">
-              <span class="asmt-label">06</span>
-              <span class="asmt-title">Assignment 6</span>
-              <span class="asmt-tag">Concept</span>
-            </a>
-          </li>
-          <li>
-            <a href="./assignment7/assignment7.html">
-              <span class="asmt-label">07</span>
-              <span class="asmt-title">Assignment 7</span>
-              <span class="asmt-tag">Final</span>
-            </a>
-          </li>
-        </ul>
-      </div>
+    <!-- ASSIGNMENT GRID -->
+    <section class="assignment-grid">
+
+      <!-- Assignment 1 -->
+      <article class="assignment-card">
+        <a href="./assignment1.html" class="assignment-link">
+          <div class="thumb">
+            <!-- Replace with a real image -->
+            <!-- <img src="images/asmt1.jpg" alt="Assignment 1 preview"> -->
+            <span class="thumb-label">01</span>
+          </div>
+          <div class="assignment-body">
+            <h3>Assignment 1</h3>
+            <p>First step into creative coding. Setting up, testing, and breaking things on purpose.</p>
+          </div>
+        </a>
+      </article>
+
+      <!-- Assignment 2 -->
+      <article class="assignment-card">
+        <a href="./assignment2/assignment2.html" class="assignment-link">
+          <div class="thumb">
+            <!-- <img src="images/asmt2.jpg" alt="Assignment 2 preview"> -->
+            <span class="thumb-label">02</span>
+          </div>
+          <div class="assignment-body">
+            <h3>Assignment 2</h3>
+            <p>Iterating on interaction — adding motion, randomness, or a small surprise.</p>
+          </div>
+        </a>
+      </article>
+
+      <!-- Assignment 3 -->
+      <article class="assignment-card">
+        <a href="./assignment3/assignment3.html" class="assignment-link">
+          <div class="thumb">
+            <!-- <img src="images/asmt3.jpg" alt="Assignment 3 preview"> -->
+            <span class="thumb-label">03</span>
+          </div>
+          <div class="assignment-body">
+            <h3>Assignment 3</h3>
+            <p>Exploring visuals, composition, or storytelling through simple systems.</p>
+          </div>
+        </a>
+      </article>
+
+      <!-- Assignment 4 -->
+      <article class="assignment-card">
+        <a href="./assignment4/assignment4.html" class="assignment-link">
+          <div class="thumb">
+            <!-- <img src="images/asmt4.jpg" alt="Assignment 4 preview"> -->
+            <span class="thumb-label">04</span>
+          </div>
+          <div class="assignment-body">
+            <h3>Assignment 4</h3>
+            <p>Trying out new inputs, controls, or ways for people to poke at the code.</p>
+          </div>
+        </a>
+      </article>
+
+      <!-- Assignment 5 -->
+      <article class="assignment-card">
+        <a href="./assignment5/assignment5.html" class="assignment-link">
+          <div class="thumb">
+            <!-- <img src="images/asmt5.jpg" alt="Assignment 5 preview"> -->
+            <span class="thumb-label">05</span>
+          </div>
+          <div class="assignment-body">
+            <h3>Assignment 5</h3>
+            <p>Leaning into playfulness — unexpected outcomes, happy accidents, small games.</p>
+          </div>
+        </a>
+      </article>
+
+      <!-- Assignment 6 -->
+      <article class="assignment-card">
+        <a href="./assignment6/assignment6.html" class="assignment-link">
+          <div class="thumb">
+            <!-- <img src="images/asmt6.jpg" alt="Assignment 6 preview"> -->
+            <span class="thumb-label">06</span>
+          </div>
+          <div class="assignment-body">
+            <h3>Assignment 6</h3>
+            <p>More conceptual: focusing on mood, narrative, or a specific feeling.</p>
+          </div>
+        </a>
+      </article>
+
+      <!-- Assignment 7 -->
+      <article class="assignment-card">
+        <a href="./assignment7/assignment7.html" class="assignment-link">
+          <div class="thumb">
+            <!-- <img src="images/asmt7.jpg" alt="Assignment 7 preview"> -->
+            <span class="thumb-label">07</span>
+          </div>
+          <div class="assignment-body">
+            <h3>Assignment 7</h3>
+            <p>Final piece — bringing together what I’ve learned this semester.</p>
+          </div>
+        </a>
+      </article>
+
     </section>
+
+    <footer class="page-footer">
+      <p>© 2025 Your Name · CC Lab Portfolio</p>
+    </footer>
+
   </main>
-
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p>© 2025 Luke Wang· CC Lab</p>
-      <p class="footer-note">Built with HTML &amp; CSS</p>
-    </div>
-  </footer>
+</div>
 
 </body>
 </html>
