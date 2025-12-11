@@ -2,29 +2,107 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>About Me</title>
+  <title>About · Luke Wang</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Same fonts as index -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <header class="hero">
-    <h1>About Me</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="about.html">About Me</a>
-    </nav>
-  </header>
+<div class="layout">
 
-  <main class="grid">
-    <section class="card intro">
-      <h2>Hello!</h2>
-      <p>This is where your "about me" can go.</p>
+  <!-- SIDEBAR (same as index) -->
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <div class="identity-block">
+        <div class="mark-line"></div>
+        <div class="identity-text">
+          <h1>Luke Wang</h1>
+          <p class="role">CC LAB / PORTFOLIO</p>
+        </div>
+      </div>
+
+      <p class="bio">
+        selected works, 2025  
+        fragments of code, light, and quiet errors.
+      </p>
+
+      <nav class="side-nav">
+        <a href="index.html" class="side-nav-link">index</a>
+        <a href="about.html" class="side-nav-link active">about</a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <p class="sidebar-note">
+          / recorded in html &amp; css  
+          / viewed best in a gray room
+        </p>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="content">
+
+    <!-- HEADER STRIP -->
+    <section class="hero-strip">
+      <div class="hero-label">ABOUT</div>
+      <div class="hero-title-row">
+        <h2>ARTIST NOTE</h2>
+        <span class="hero-meta">LW-01</span>
+      </div>
     </section>
+
+    <!-- ABOUT LAYOUT: image + text -->
+    <section class="about-layout">
+
+      <!-- Left: profile image as a “film still” -->
+      <div class="about-image-block">
+        <div class="about-image-frame">
+          <img src="pfp.PNG" alt="Portrait of Luke Wang" >
+        </div>
+      </div>
+
+      <!-- Right: text -->
+      <div class="about-block">
+        <h3 class="about-title">Hello.</h3>
+
+        <p class="about-text">
+          I studied Computer Science at UC San Diego, where I built a strong foundation
+          in computational thinking and technical problem-solving. Over time, I realized
+          that what moved me most was not just how systems work, but how people
+          experience them.
+        </p>
+
+        <p class="about-text">
+          That realization led me to the Design and Technology MFA program at Parsons,
+          where I focus on interaction design, game design, and experimental digital
+          media. I’m interested in interfaces that feel slightly off, slightly eerie —
+          somewhere between tool, toy, and scene.
+        </p>
+
+        <p class="about-text">
+          My goal is to create work that feels like an encounter: quiet, emotional,
+          and a little cinematic. I want my designs to slip past pure function and sit
+          closer to art — something you return to, rather than just use once.
+        </p>
+      </div>
+
+    </section>
+
+    <footer class="page-footer">
+      <p>© 2025 Luke Wang</p>
+    </footer>
+
   </main>
 
-  <footer>
-    <p>© 2025 Your Name.</p>
-  </footer>
+</div>
 
 </body>
 </html>

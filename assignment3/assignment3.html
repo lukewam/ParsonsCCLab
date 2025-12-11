@@ -2,128 +2,213 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Experimental Clock</title>
+  <title>Assignment 03 · Experimental Clock</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Same fonts as index/about -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="../style.css">
 
-  <!-- p5.js CDN -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/p5@1.11.10/lib/p5.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.10/lib/addons/p5.sound.min.js"></script>
+  <!-- p5.js + sound (single version) -->
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.11.0/lib/p5.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.11.0/lib/addons/p5.sound.min.js"></script>
 </head>
 <body>
 
-  <header class="hero">
-    <h1>Experimental Clock</h1>
-    <nav>
-      <a href="../index.html">Home</a>
-      <a href="../about.html">About Me</a>
-    </nav>
-  </header>
+<div class="layout">
 
-  <main class="grid">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-inner">
 
-    <!-- Project Description -->
-    <section class="card">
-      <h2>Project Description</h2>
-      <p>
-       This clock is inspired by the oriental elegancy and romantic spirit, 
-       that time should not be just a number but a part of nature and art. 
-       In nature, flowers are one representation of the time, since flowers and leaves are seasonal, 
-       and the sun is changing along the day. I want everything to be a whole thing, no number, no clock hand, nothing but only painting itself.
-      <br>
-      <br>
-        In this project, leaves are representing the hours, the flowers are representing minutes, the sun is representing the day and night. 
-        The number of leaf is current hour, in 12 hour format. If there is a sun, it is first 12 hours of the day. 
-        If there is no sun, it is the second 12 hours of the day. The number of flower is how many 5 minutes has pass in current hour, just like a grid in a clock.
-        <br>
-        <br>
-        For example, in the morning, 8:08 would be a sun, 8 leaves, 2 flowers.
-        <br>
-        <br>
-        My three ideas are more like a process of thinking. From the most basic, using number to represent time, 
-        and clock hand to represent the time, to this, I keep thinking about how I can do differently than the traditional representation.
-        <br>
-        <br>
-        What I learn from this assignment is that coding is just a tool for the art making. My codes are not that complex, but it does has a good artistic outcome. 
-        <br>
+      <div class="identity-block">
+        <div class="mark-line"></div>
+        <div class="identity-text">
+          <h1>Luke Wang</h1>
+          <p class="role">CC LAB / PORTFOLIO</p>
+        </div>
+      </div>
+
+      <p class="bio">
+        selected works, 2025  
+        fragments of code, light, and quiet errors.
       </p>
+
+      <nav class="side-nav">
+        <a href="../index.html" class="side-nav-link">index</a>
+        <a href="../about.html" class="side-nav-link">about</a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <p class="sidebar-note">
+          / recorded in html &amp; css  
+          / assignment 03 · experimental clock
+        </p>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="content">
+
+    <!-- HEADER STRIP -->
+    <section class="hero-strip">
+      <div class="hero-label">ASSIGNMENT 03</div>
+      <div class="hero-title-row">
+        <h2>EXPERIMENTAL CLOCK</h2>
+        <span class="hero-meta">A03</span>
+      </div>
     </section>
 
-    <!-- p5 Sketch -->
-    <section class="card">
-      <h2>My Sketch</h2>
-      <div id="sketch-container"></div>
+    <!-- LAYOUT: TEXT + SKETCH -->
+    <section class="assignment-layout">
+
+      <!-- Reflection / description -->
+      <div class="assignment-text-block">
+        <h3 class="assignment-title">Project Reflection</h3>
+
+        <p class="assignment-text">
+          This clock is inspired by a kind of quiet, romantic oriental elegance — the
+          idea that time should not only exist as numbers, but as part of nature and
+          art. In nature, flowers and leaves are one way we feel time passing: they
+          are seasonal, and the sun shifts across the sky to mark the day. I wanted
+          the clock to feel like a single painting: no numbers, no clock hands, just
+          an image that carries time inside it.
+        </p>
+
+        <p class="assignment-text">
+          In this project, the leaves represent the hours, the flowers represent the
+          minutes, and the sun represents day and night. The number of leaves equals
+          the current hour in a 12-hour format. If the sun is visible, it is the
+          first 12 hours of the day; if there is no sun, it is the second 12 hours.
+          The number of flowers shows how many 5-minute segments have passed within
+          the current hour, like the markings on a traditional clock.
+        </p>
+
+        <p class="assignment-text">
+          For example, in the morning, 8:08 would be represented as: a sun (it is in
+          the first half of the day), eight leaves, and two flowers.
+        </p>
+
+        <p class="assignment-text">
+          I approached this assignment through several ideas, starting from more
+          conventional representations — using numbers and clock hands — and then
+          gradually moving away from them. I kept asking how I could represent time
+          differently, in a way that feels more like an atmosphere than an interface.
+        </p>
+
+        <p class="assignment-text">
+          What I learned from this assignment is that code is just one tool in the
+          larger process of making an artwork. The code itself is not very complex,
+          but it enables a visual system that feels poetic and complete on the screen.
+        </p>
+      </div>
+
+      <!-- p5 Sketch -->
+      <div class="assignment-sketch-block">
+        <h3 class="assignment-title">Sketch</h3>
+        <div class="sketch-frame">
+          <div id="sketch-container"></div>
+        </div>
+      </div>
+
     </section>
+
+    <footer class="page-footer">
+      <p>© 2025 Luke Wang</p>
+    </footer>
 
   </main>
 
-  <footer>
-    <p>© 2025 My Portfolio</p>
-  </footer>
+</div>
 
+<!-- p5.js SKETCH SCRIPT -->
+<script>
+// flower = minute, leaf = hour, sun = day/night
 
-  <!-- p5.js SKETCH SCRIPT -->
-  <script>
+let flowerPOS = [
+  151, 399, 371, 166, 437, 96, 726, 179,
+  448, 451, 832, 292, 886, 281, 337, 382,
+  613, 353, 590, 310, 800, 551, 875, 421
+];
 
-//flower is minute, leaf is hour, sun is morning or afternoon
+let leafPOS = [
+  117, 326, 260, 271, 508, 271, 433, 106,
+  715, 178, 861, 281, 814, 691, 524, 603,
+  322, 560, 267, 135, 642, 191, 106, 377
+];
 
-let flowerPOS = [151,399,371,166,437,96,726,179,448,451,832,292,886,281,337,382,613,353,590,310,800,551,875,421]
-let leafPOS=[117,326,260,271,508,271,433,106,715,178,861,281,814,691,524,603,322,560,267,135,642,191,106,377]
+let trunk, flower, leaf, sun;
+
+function preload() {
+  trunk = loadImage("./asset/trunk.png");
+  flower = loadImage("./asset/flower.png");
+  leaf = loadImage("./asset/leaf.png");
+  sun = loadImage("./asset/sun.png");
+}
 
 function setup() {
   let canvas = createCanvas(1000, 1000);
   canvas.parent("sketch-container");
 }
 
-function preload() {
-  trunk = loadImage('./asset/trunk.png');
-  flower=loadImage('./asset/flower.png');
-  leaf=loadImage('./asset/leaf.png');
-  sun=loadImage('./asset/sun.png');
-}
-
 function draw() {
   background(220);
   image(trunk, 0, 0);
-  //image(sun,0,0,300,300)
-  //console.log(mouseX,mouseY)
-  //console.log(leafPOS.length)
-  
-  //change the method to test
-  drawMin(minute())
-  drawHr(hour())
-  //console.log(hour()/2)
+
+  // draw current time as flowers and leaves
+  drawMin(minute());
+  drawHr(hour());
 }
 
-function drawMin(x){
-  for(let i = 0; i < 12; i ++){
-    if((x / 5) >= i){
-      image(flower,(flowerPOS[i*2]-40),flowerPOS[i*2 + 1], 100, 100)
-      //console.log(i)
+function drawMin(m) {
+  // each flower represents 5 minutes
+  for (let i = 0; i < 12; i++) {
+    if (m / 5 >= i) {
+      image(
+        flower,
+        flowerPOS[i * 2] - 40,
+        flowerPOS[i * 2 + 1],
+        100,
+        100
+      );
     }
   }
 }
 
-function drawHr(x){
-
-    if( x > 12) {
-        for(let i = 0; i < 12; i ++){
-      if((x -12 - 1) >= i){
-        image(leaf,leafPOS[i*2],(leafPOS[i*2 + 1]-80), 100, 100)
-        //console.log(i)
-      } } 
-    } else{
-      image(sun,0,0,300,300)
-      for(let i = 0; i < 12; i ++){
-      if((x - 1) >= i){
-        image(leaf,leafPOS[i*2],(leafPOS[i*2 + 1]-80), 100, 100)
-        //console.log(i)
-      } } 
+function drawHr(h) {
+  // 12-hour representation with sun for first half of day
+  if (h > 12) {
+    for (let i = 0; i < 12; i++) {
+      if (h - 12 - 1 >= i) {
+        image(
+          leaf,
+          leafPOS[i * 2],
+          leafPOS[i * 2 + 1] - 80,
+          100,
+          100
+        );
+      }
     }
+  } else {
+    image(sun, 0, 0, 300, 300);
+    for (let i = 0; i < 12; i++) {
+      if (h - 1 >= i) {
+        image(
+          leaf,
+          leafPOS[i * 2],
+          leafPOS[i * 2 + 1] - 80,
+          100,
+          100
+        );
+      }
+    }
+  }
 }
-
-    // Your p5.js code will go here. 
-  </script>
+</script>
 
 </body>
 </html>

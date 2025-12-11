@@ -2,127 +2,196 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Data Portrait</title>
+  <title>Assignment 06 · Data Portrait</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Same fonts as index/about -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="../style.css">
 
-  <!-- p5.js CDN -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/p5@1.11.10/lib/p5.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.10/lib/addons/p5.sound.min.js"></script>
+  <!-- p5.js + sound (single version) -->
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.11.0/lib/p5.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.11.0/lib/addons/p5.sound.min.js"></script>
 </head>
 <body>
 
-  <header class="hero">
-    <h1>Data Portrait</h1>
-    <nav>
-      <a href="../index.html">Home</a>
-      <a href="../about.html">About Me</a>
-    </nav>
-  </header>
+<div class="layout">
 
-  <main class="grid">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-inner">
 
-    <!-- Project Description -->
-    <section class="card">
-      <h2>Project Description</h2>
-      <p>
-       I have an app on my phone that tracks where I go during the day, and when I first hear this assignment, 
-       I immediately think this is the perfect fit for my project. 100 % accurate data taken, and the sample amount is enormous. 
-       Even though it is not the most creative way to present, I think it is straight forwards to comprehend 
-       and really shows a pattern of where I go in a week, and my habit of commuting and hanging out with my friend.
-       <br>
-       <br>
-    Each dot is a location taken when I start moving, and it records how I move during the week. 
-    The instruction is simple: I insert the screen shot of the map, and it matches the range of where I go usually. 
-        <br>
-        <br>
-        I export the data from the app, and it was a csv file. I did multiple test, it does not contain a week long file, 
-        so I test first with 1 day file to make sure it work and truncate a year long file, since it was too big. I then map the longtitude and 
-        latitude to the size of the canvas and convert them to x and y. 
-I mimic the style of an apple map, so viewers would feel familiar to what they see everyday. 
-<br>
-<br>
-      The good thing about using csv file and real life map is that I think there is no loss in data visualization at all (except the READ ME i mentioned), 
-      and the gain is that the data is over 2000 locations, and it is literally unreadable, so data visualization makes it possible to read.
+      <div class="identity-block">
+        <div class="mark-line"></div>
+        <div class="identity-text">
+          <h1>Luke Wang</h1>
+          <p class="role">CC LAB / PORTFOLIO</p>
+        </div>
+      </div>
+
+      <p class="bio">
+        selected works, 2025  
+        fragments of code, light, and quiet errors.
+      </p>
+
+      <nav class="side-nav">
+        <a href="../index.html" class="side-nav-link">index</a>
+        <a href="../about.html" class="side-nav-link">about</a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <p class="sidebar-note">
+          / assignment 06 · data portrait
         </p>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="content">
+
+    <!-- HEADER STRIP -->
+    <section class="hero-strip">
+      <div class="hero-label">ASSIGNMENT 06</div>
+      <div class="hero-title-row">
+        <h2>DATA PORTRAIT</h2>
+        <span class="hero-meta">A06</span>
+      </div>
     </section>
 
-    <!-- p5 Sketch -->
-    <section class="card">
-      <h2>My Sketch</h2>
-      <div id="sketch-container"></div>
+    <!-- LAYOUT: TEXT + SKETCH -->
+    <section class="assignment-layout">
+
+      <!-- Reflection / description -->
+      <div class="assignment-text-block">
+        <h3 class="assignment-title">Project Reflection</h3>
+
+        <p class="assignment-text">
+          I have an app on my phone that tracks where I go during the day, and when I
+          first heard this assignment, I immediately felt that this data set was a
+          perfect fit. The data is highly accurate, the sample size is large, and it
+          connects directly to my own daily life. Even though the visualization is not
+          the most unconventional concept, it is very straightforward to understand
+          and clearly reveals patterns in my week: how I commute, where I tend to go,
+          and how I move through the city.
+        </p>
+
+        <p class="assignment-text">
+          Each dot represents a location captured when I start moving, recording my
+          movement over the week. My approach was simple: I took a screenshot of the
+          map, aligned the canvas to roughly match the area I usually travel in, and
+          then plotted each point on top of it.
+        </p>
+
+        <p class="assignment-text">
+          I exported the data from the app as a CSV file. After testing, I realized it
+          didn’t give me exactly one week in a clean slice, so I first tried a
+          single-day file to make sure the mapping worked, and then truncated a
+          year-long file, which was originally too large. I mapped longitude and
+          latitude into the canvas coordinate system and converted them into x and y
+          positions.
+        </p>
+
+        <p class="assignment-text">
+          Visually, I mimicked the style of Apple Maps so that viewers feel an
+          immediate familiarity with what they are seeing. That makes it easier for
+          them to recognize the kind of information being shown without needing much
+          explanation.
+        </p>
+
+        <p class="assignment-text">
+          The advantage of using CSV data with a real map is that very little
+          information is lost in the translation to a visualization (aside from a
+          small amount I mention in my project notes). In return, the gain is huge:
+          the data set includes over 2,000 locations and is essentially unreadable in
+          raw form, but the visualization makes it possible to see structure, habits,
+          and rhythm in how I move.
+        </p>
+      </div>
+
+      <!-- p5 Sketch -->
+      <div class="assignment-sketch-block">
+        <h3 class="assignment-title">Sketch</h3>
+        <div class="sketch-frame">
+          <div id="sketch-container"></div>
+        </div>
+      </div>
+
     </section>
+
+    <footer class="page-footer">
+      <p>© 2025 Luke Wang</p>
+    </footer>
 
   </main>
 
-  <footer>
-    <p>© 2025 My Portfolio</p>
-  </footer>
+</div>
 
-
-  <!-- p5.js SKETCH SCRIPT -->
-  <script>
-
-//double array containing longtitude and latitude
+<!-- p5.js SKETCH SCRIPT -->
+<script>
+// double array containing longitude and latitude
 let pts = [];
+let table;
+let maps;
 
 function preload() {
-  table = loadTable('fp1.csv', 'csv', 'header');
-  maps = loadImage('map.png');
+  table = loadTable("fp1.csv", "csv", "header");
+  maps = loadImage("map.png");
 }
 
 function setup() {
-
   let canvas = createCanvas(636, 638);
-    canvas.parent("sketch-container")
+  canvas.parent("sketch-container");
+
   background(245);
-  image(maps,-638/19 , 638/7,636, 638*2/3)
-  
+  image(maps, -638 / 19, 638 / 7, 636, (638 * 2) / 3);
 
   // collect valid lat/lon
   for (let r = 0; r < table.getRowCount(); r++) {
-    const lat = float(table.getString(r, 'latitude'));
-    const lon = float(table.getString(r, 'longitude'));
+    const lat = float(table.getString(r, "latitude"));
+    const lon = float(table.getString(r, "longitude"));
     pts.push({ lat, lon });
   }
- 
-  //exception
+
+  // if no points, stop
   if (pts.length === 0) {
     noLoop();
     return;
   }
 
   // bounds
-  const minLat = Math.min(...pts.map(p => p.lat));
-  const maxLat = Math.max(...pts.map(p => p.lat));
-  const minLon = Math.min(...pts.map(p => p.lon));
-  const maxLon = Math.max(...pts.map(p => p.lon));
+  const minLat = Math.min(...pts.map((p) => p.lat));
+  const maxLat = Math.max(...pts.map((p) => p.lat));
+  const minLon = Math.min(...pts.map((p) => p.lon));
+  const maxLon = Math.max(...pts.map((p) => p.lon));
 
-  // ensure all points fit within visible region with a clean margin
+  // visible region with margin
   const margin = 40;
   const w = width - 2 * margin;
   const h = height - 2 * margin;
 
-  // scale to fit (keep aspect ratio), use or in case max == min
+  // scale to fit (keep aspect ratio)
   const sx = w / (maxLon - minLon || 1);
   const sy = h / (maxLat - minLat || 1);
   const s = min(sx, sy);
 
-  // center the plot within canvas, constant offset
-  const offsetX = (width  - (maxLon - minLon) * s) / 2;
+  // center plot
+  const offsetX = (width - (maxLon - minLon) * s) / 2;
   const offsetY = (height - (maxLat - minLat) * s) / 2;
 
   // draw all points
   fill(30, 144, 255, 180);
   noStroke();
-  for (var p of pts) {
+  for (let p of pts) {
     const x = offsetX + (p.lon - minLon) * s;
     const y = height - (offsetY + (p.lat - minLat) * s);
     circle(x, y, 4);
   }
 }
-    // Your p5.js code will go here. 
-  </script>
+</script>
 
 </body>
 </html>

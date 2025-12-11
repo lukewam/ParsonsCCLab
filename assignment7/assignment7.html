@@ -2,164 +2,245 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Autobiographical Game</title>
+  <title>Assignment 07 · Autobiographical Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Same fonts as index/about -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="../style.css">
 
-  <!-- p5.js CDN -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.10/lib/p5.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.10/lib/addons/p5.sound.min.js"></script>
+  <!-- p5.js + sound (single version) -->
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.11.0/lib/p5.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.11.0/lib/addons/p5.sound.min.js"></script>
 </head>
 <body>
 
-  <header class="hero">
-    <h1>Autobiographical Game</h1>
-    <nav>
-      <a href="../index.html">Home</a>
-      <a href="../about.html">About Me</a>
-    </nav>
-  </header>
+<div class="layout">
 
-  <main class="grid">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-inner">
 
-    <!-- Project Description -->
-    <section class="card">
-      <h2>Project Description</h2>
-      <p>
-        It was Halloween during the production of the game, so I was thinking about making something
-        spooky. This simulates the experience of me going to school. I used the real photo of my shool, Parsons
-        as background and use a random algorithm for ghosts to show up. Sadly, the sound feature does 
-        not work here, but it should play spooky sound after day 2.
-      
+      <div class="identity-block">
+        <div class="mark-line"></div>
+        <div class="identity-text">
+          <h1>Luke Wang</h1>
+          <p class="role">CC LAB / PORTFOLIO</p>
+        </div>
+      </div>
+
+      <p class="bio">
+        selected works, 2025  
+        fragments of code, light, and quiet errors.
+      </p>
+
+      <nav class="side-nav">
+        <a href="../index.html" class="side-nav-link">index</a>
+        <a href="../about.html" class="side-nav-link">about</a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <p class="sidebar-note">
+          / assignment 07 · autobiographical game
         </p>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="content">
+
+    <!-- HEADER STRIP -->
+    <section class="hero-strip">
+      <div class="hero-label">ASSIGNMENT 07</div>
+      <div class="hero-title-row">
+        <h2>AUTOBIOGRAPHICAL GAME</h2>
+        <span class="hero-meta">A07</span>
+      </div>
     </section>
 
-    <!-- p5 Sketch -->
-    <section class="card">
-      <h2>My Sketch</h2>
-      <div id="sketch-container"></div>
+    <!-- LAYOUT: TEXT + SKETCH -->
+    <section class="assignment-layout">
+
+      <!-- Reflection -->
+      <div class="assignment-text-block">
+        <h3 class="assignment-title">Project Reflection</h3>
+
+        <p class="assignment-text">
+          I made this game around Halloween, so I wanted it to feel slightly spooky
+          and surreal. The game simulates my daily commute to school. I used real
+          photos of Parsons as backgrounds and added ghosts that appear randomly
+          as you move through the scenes.
+        </p>
+
+        <p class="assignment-text">
+          The player walks through classrooms and subway cars, repeating the same
+          route day after day. As more days pass, the ghosts become more present and
+          the mood shifts from normal to uncanny. After the second day, a spooky
+          sound is meant to play, reinforcing that sense of unease.
+        </p>
+
+        <p class="assignment-text">
+          Technically, the project combines simple scene management with random ghost
+          placement and a basic walking animation. The sound system needed extra care
+          because modern browsers restrict autoplay—so audio has to be triggered only
+          after user interaction. Once that was resolved, the piece felt closer to
+          what I imagined: a small, haunted loop of my everyday commute.
+        </p>
+      </div>
+
+      <!-- Sketch -->
+      <div class="assignment-sketch-block">
+        <h3 class="assignment-title">Sketch</h3>
+        <div class="sketch-frame">
+          <div id="sketch-container"></div>
+        </div>
+      </div>
+
     </section>
+
+    <footer class="page-footer">
+      <p>© 2025 Luke Wang</p>
+    </footer>
 
   </main>
 
-  <footer>
-    <p>© 2025 My Portfolio</p>
-  </footer>
+</div>
 
-
-  <!-- p5.js SKETCH SCRIPT -->
-  <script>
-let scene = "start"
+<!-- p5.js SKETCH SCRIPT -->
+<script>
+let scene = "start";
 let player;
 let walkScene = 0;
 let ghosts = [];
-let r
+let r;
 let dayCt = 0;
 let showWhich;
 let showG;
 
+let lr;              // sound
+let audioStarted = false;
+
+// images
+let endG, ghost1, ghost2, ghost3, ghost4, ghost5;
+let subway1, subway2, sb1, sb2;
+let classroom1, classroom2, cr1, cr2;
+let mc, nd;
+
+function preload() {
+  // IMPORTANT: make sure lr.mp3 is in the same folder as this HTML,
+  // or update the path below (e.g. "./asset/lr.mp3").
+  lr = loadSound("lr.mp3");
+
+  endG = loadImage("endG.jpg");
+  ghost1 = loadImage("ghost1.jpg");
+  ghost2 = loadImage("ghost2.avif");
+  ghost4 = loadImage("ghost4.jpg");
+  ghost5 = loadImage("ghost5.jpg");
+  ghost3 = loadImage("ghost3.avif");
+
+  subway1 = loadImage("subway1.JPEG");
+  subway2 = loadImage("subway2.JPEG");
+  sb1 = loadImage("sb1.jpg");
+  sb2 = loadImage("sb2.jpg");
+
+  classroom1 = loadImage("classroom1.png");
+  classroom2 = loadImage("classroom2.png");
+  cr1 = loadImage("cr1.png");
+  cr2 = loadImage("cr2.jpg");
+
+  mc = loadImage("mc.png");
+  nd = loadImage("nextday.png");
+}
+
 function setup() {
-  let canvas = createCanvas(600, 600);  
-  canvas.parent("sketch-container")
+  let canvas = createCanvas(600, 600);
+  canvas.parent("sketch-container");
+
   r = random(50, 600);
-  //hardcoded 
   showWhich = floor(random(5));
   showG = floor(random(3));
 
-  ghosts.push(new Ghost(ghost1, random(0, 600 -r), r));
-  ghosts.push(new Ghost(ghost2,random(0, 600 -r), r));
-  ghosts.push(new Ghost(ghost4,random(0, 600 -r), r));
-  ghosts.push(new Ghost(ghost5,random(0, 600 -r), r));
-  ghosts.push(new Ghost(ghost3,0,600));
+  ghosts.push(new Ghost(ghost1, random(0, 600 - r), r));
+  ghosts.push(new Ghost(ghost2, random(0, 600 - r), r));
+  ghosts.push(new Ghost(ghost4, random(0, 600 - r), r));
+  ghosts.push(new Ghost(ghost5, random(0, 600 - r), r));
+  ghosts.push(new Ghost(ghost3, 0, 600));
+
   startGame();
 }
 
-function preload() {
-  //lr = loadSound('http://localhost/lr.mp3', loaded)
-  endG = loadImage('endG.jpg');
-  ghost1 = loadImage('ghost1.jpg');
-  ghost2=loadImage('ghost2.avif');
-  ghost4 = loadImage('ghost4.jpg');
-  ghost5 = loadImage('ghost5.jpg');
-  ghost3=loadImage('ghost3.avif');
-  subway1=loadImage('subway1.JPEG');
-  sb1 = loadImage('sb1.jpg');
-  sb2 = loadImage('sb2.jpg');
-  subway2=loadImage('subway2.JPEG');
-  classroom1=loadImage('classroom1.png');
-  cr1 = loadImage('cr1.png');
-  classroom2=loadImage('classroom2.png');
-  cr2 = loadImage('cr2.jpg');
-  mc = loadImage('mc.png');
-  nd = loadImage('nextday.png');
+// unlock audio context on first key press (required by browsers)
+function keyPressed() {
+  if (!audioStarted) {
+    userStartAudio();
+    audioStarted = true;
+  }
 }
 
 class Ghost {
-  constructor(img, r, p){
+  constructor(img, r, p) {
     this.img = img;
-    this. r = r;
+    this.r = r;
     this.p = p;
   }
 
-  changePos(){
+  changePos() {
     this.r = random(50, 600);
-    this. p = random(0, 600 - this.r)
+    this.p = random(0, 600 - this.r);
   }
-  
-  display(){
-    if(dayCt > 0 && showG){
-    push()
-    tint(255, 127);
-    image(this.img, this.r, this.r, this.p, this.p)
-    pop()
 
+  display() {
+    // show ghost only after the first day, and only if showG is truthy
+    if (dayCt > 0 && showG) {
+      push();
+      tint(255, 127);
+      image(this.img, this.r, this.r, this.p, this.p);
+      pop();
     }
-    this.check = true;
   }
-  
 }
 
 class Player {
-  constructor(){
-    //how many days passed
+  constructor() {
     this.days = 0;
     this.x = 50;
-    this.y = height
-    this.yBase = height
-    this.nextScene = false
+    this.y = height;
+    this.yBase = height;
+    this.nextScene = false;
   }
-  
-  display(){
-    //rect(this.x,this.y-200,100,200);
-    image(mc,this.x, this.y-300,200,400)
+
+  display() {
+    image(mc, this.x, this.y - 300, 200, 400);
   }
-  
-  controls(){
+
+  controls() {
     if (keyIsDown(LEFT_ARROW)) this.x -= 2;
     if (keyIsDown(RIGHT_ARROW)) this.x += 5;
-    
-    if (keyIsDown(LEFT_ARROW) || keyIsDown(RIGHT_ARROW)) {
-  this.y = this.yBase - (frameCount % 20 < 10 ? 10 : 0); // up when moving
-  } else {
-    this.y = this.yBase; // down when standing
-    
-  if(this.x >= 600){
-      this.nextScene = true;
 
-        }
+    if (keyIsDown(LEFT_ARROW) || keyIsDown(RIGHT_ARROW)) {
+      this.y = this.yBase - (frameCount % 20 < 10 ? 10 : 0);
+    } else {
+      this.y = this.yBase;
+      if (this.x >= 600) {
+        this.nextScene = true;
       }
     }
+  }
 }
 
 function draw() {
   background(43, 42, 42);
-  
-  switch(scene){
-    case "start" :
-      startScene()
+
+  switch (scene) {
+    case "start":
+      startScene();
       break;
-    case "walkday" :
-      walkday()
+    case "walkday":
+      walkday();
       break;
     case "nextDay":
       nextday();
@@ -170,113 +251,114 @@ function draw() {
   }
 }
 
-function startGame(){
+function startGame() {
   player = new Player();
   scene = "start";
 }
 
-function end(){
-  image(endG, 0,0, 600,600);
+function end() {
+  image(endG, 0, 0, 600, 600);
 }
 
-function nextday(){
-  if(keyIsDown(32)){
-  if(dayCt == 1){
- //   lr.play();
-  }
+function nextday() {
+  // SPACE to continue to walking scene
+  if (keyIsDown(32)) {
+    // play spooky sound starting from day 2 (dayCt == 1)
+    if (dayCt == 1 && lr && !lr.isPlaying()) {
+      lr.play();
+    }
     scene = "walkday";
   }
-  if(dayCt > 3){
-    scene = "end"
+
+  if (dayCt > 3) {
+    scene = "end";
   }
-  image(nd, 0,0, 600,600);
+
+  image(nd, 0, 0, 600, 600);
 }
 
 function startScene() {
   textAlign(CENTER);
   fill(191, 44, 44);
-  textFont('Courier New',20);
-  text("This is based on true story", width / 2, height / 2 - 20);
+  textFont("Courier New", 20);
+  text("This is based on a true story", width / 2, height / 2 - 20);
   textSize(16);
-  text("Use LEFT/RIGHT to move, click to investigate", width / 2, height / 2 + 10);
+  text("Use LEFT / RIGHT to move, click to investigate", width / 2, height / 2 + 10);
   text("Press SPACE to start", width / 2, height / 2 + 40);
 
   if (keyIsDown(32)) {
     scene = "walkday";
   }
-  
 }
 
 function walkday() {
-  switch (walkScene){
-    case 0: 
-      if(dayCt > 1){
-        image(cr1,0,0, 600,600);
-      } else{
-      image(classroom1, 0,0, 600,600);
+  switch (walkScene) {
+    case 0:
+      if (dayCt > 1) {
+        image(cr1, 0, 0, 600, 600);
+      } else {
+        image(classroom1, 0, 0, 600, 600);
       }
       ghosts[showWhich].display();
       break;
     case 1:
-      if(dayCt > 1 ){
-        image(cr2,0,0, 600,600);
+      if (dayCt > 1) {
+        image(cr2, 0, 0, 600, 600);
       } else {
-      image(classroom2,0,0, 600,600);
+        image(classroom2, 0, 0, 600, 600);
       }
       ghosts[showWhich].display();
       break;
-    case 2: 
-      if(dayCt > 1 ){
-          image(sb1,0,0, 600,600);
+    case 2:
+      if (dayCt > 1) {
+        image(sb1, 0, 0, 600, 600);
       } else {
-          image(subway1, 0,0, 600,600);
+        image(subway1, 0, 0, 600, 600);
       }
-        ghosts[showWhich].display();
+      ghosts[showWhich].display();
       break;
     case 3:
-      if(dayCt > 1 ){
-          image(sb2,0,0, 600,600);
+      if (dayCt > 1) {
+        image(sb2, 0, 0, 600, 600);
       } else {
-          image(subway2,0,0, 600,600);
+        image(subway2, 0, 0, 600, 600);
       }
-        ghosts[showWhich].display();
+      ghosts[showWhich].display();
       break;
   }
+
   player.display();
   player.controls();
-  if(player.nextScene == true && walkScene <3){
-    walkScene ++;
+
+  if (player.nextScene === true && walkScene < 3) {
+    walkScene++;
     player.x = 50;
     player.nextScene = false;
     showWhich = floor(random(ghosts.length));
     showG = floor(random(3));
-    for(i = 0; i < ghosts.length-1; i ++){
+    for (let i = 0; i < ghosts.length - 1; i++) {
       ghosts[i].changePos();
     }
-    if(dayCt > 2){
+    if (dayCt > 2) {
       showG = 1;
     }
-
-  } if (player.nextScene == true && walkScene >=3){
+  } else if (player.nextScene === true && walkScene >= 3) {
     dayCt++;
     showWhich = floor(random(ghosts.length));
     showG = floor(random(3));
-    if(dayCt > 2){
+    if (dayCt > 2) {
       showG = 1;
     }
     player.nextScene = false;
     walkScene = 0;
     player.x = 50;
-    for(i = 0; i < ghosts.length-1; i ++){
+    for (let i = 0; i < ghosts.length - 1; i++) {
       ghosts[i].changePos();
     }
-    
-    
     scene = "nextDay";
   }
 }
-    // Your p5.js code will go here. 
-  </script>
+</script>
 
 </body>
 </html>
